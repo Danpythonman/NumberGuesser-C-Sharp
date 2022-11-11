@@ -16,7 +16,7 @@ namespace NumberGuesser
             {
                 randomNumber = random.Next(1, 10);
 
-                Console.WriteLine("A random number between 1 and 10 has been generated");
+                PrintGreeting();
 
                 Console.WriteLine("Take a guess: ");
 
@@ -30,21 +30,21 @@ namespace NumberGuesser
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect input. Please enter an integer.");
+                        PrintIncorrectInputMessage();
                         Console.WriteLine("Guess again: ");
                     }
                 }
 
                 if (guess == randomNumber)
                 {
-                    Console.WriteLine("Correct!");
+                    PrintWinMessage();
                 }
                 else
                 {
-                    Console.WriteLine("Wrong! The correct number was {0}", randomNumber);
+                    PrintLoseMessage(randomNumber);
                 }
 
-                Console.WriteLine("Would you like to play again? [y/n]");
+                PrintPlayAgainMessage();
 
                 input = Console.ReadLine().ToLower();
 
@@ -55,6 +55,64 @@ namespace NumberGuesser
             }
 
             Console.WriteLine("Thanks for playing!");
+        }
+
+        static void PrintGreeting()
+        {
+            Console.Write("A random number between ");
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("1");
+
+            Console.ResetColor();
+            Console.Write(" and ");
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("10");
+
+            Console.ResetColor();
+            Console.Write(" has been generated\n");
+        }
+
+        static void PrintIncorrectInputMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Incorrect input. Please enter an integer.");
+            Console.ResetColor();
+        }
+
+        static void PrintWinMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Correct!");
+            Console.ResetColor();
+        }
+
+        static void PrintLoseMessage(int correctNumber)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("Wrong! The correct number was ");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("{0}\n", correctNumber);
+            Console.ResetColor();
+        }
+        static void PrintPlayAgainMessage()
+        {
+            Console.Write("Would you like to play again? [");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("y");
+
+            Console.ResetColor();
+            Console.Write("/");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("y");
+
+            Console.ResetColor();
+            Console.Write("]\n");
         }
     }
 }
